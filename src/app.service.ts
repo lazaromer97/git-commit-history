@@ -6,10 +6,9 @@ export class AppService {
   constructor(private readonly httpService: HttpService) {}
 
   async getCommitHistory() {
+    const { GITHUB_PROJECT_COMMIT_HISTORY_URL } = process.env;
     const result = await this.httpService
-      .get(
-        'https://api.github.com/repos/lazaromer97/git-commit-history/commits',
-      )
+      .get(GITHUB_PROJECT_COMMIT_HISTORY_URL)
       .toPromise();
     return result.data || [];
   }
